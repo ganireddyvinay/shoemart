@@ -1,0 +1,128 @@
+/* Full viewport layout */
+.landing-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+}
+
+/* Background slider */
+.banner-slider {
+  display: flex;
+  height: 100%;
+  transition: transform 1.5s ease-in-out;
+}
+
+.banner-slide {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+/* Overlay gradient for text visibility */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.6)
+  );
+  z-index: 2;
+}
+
+/* Foreground content */
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 3;
+}
+
+/* Animated text */
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  color: #f5f5f5;
+  line-height: 1.5;
+}
+
+/* Button with hover effect */
+.explore-btn {
+  padding: 14px 35px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+}
+
+.explore-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 75, 43, 0.5);
+}
+
+/* Text & button animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIn {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-8px); }
+}
+
+.animate-fade {
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.animate-slide {
+  animation: slideIn 2s ease forwards;
+}
+
+.animate-bounce {
+  animation: bounceIn 2s ease infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    padding: 0 20px;
+  }
+
+  .explore-btn {
+    padding: 12px 28px;
+  }
+}

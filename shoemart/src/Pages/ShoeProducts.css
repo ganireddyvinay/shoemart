@@ -1,0 +1,82 @@
+.shoe-page {
+  display: flex;
+  width: 100%;
+  padding: 20px;
+  background: #fafafa;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+  flex: 1;
+  padding: 10px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  padding: 10px;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.product-info {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.product-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.product-info p {
+  color: #ff5e00;
+  font-weight: 500;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8px;
+}
+
+.wishlist-btn,
+.cart-btn {
+  background: #f4f4f4;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.wishlist-btn.active {
+  color: hotpink;
+}
+
+.cart-btn:hover {
+  background: #ff5e00;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .shoe-page {
+    flex-direction: column;
+  }
+}

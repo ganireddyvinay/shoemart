@@ -1,0 +1,138 @@
+.category-section {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #fff;
+}
+
+.category-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 60px;
+  letter-spacing: 1px;
+  color: #111;
+  font-family: "Poppins", sans-serif;
+}
+
+.category-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.category-card {
+  width: 340px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.8s ease;
+}
+
+.category-img {
+  width: 80%;
+  height: 220px;
+  object-fit: contain;
+  margin-bottom: 25px;
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover .category-img {
+  transform: scale(1.05);
+}
+
+.category-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #111;
+}
+
+.category-card p {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.shop-btn {
+  background: transparent;
+  color: #000;
+  border: 2px solid #000;
+  padding: 10px 25px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.shop-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.arrow:hover {
+  background: #c0392b;
+}
+
+.arrow.left {
+  left: 100px;
+}
+
+.arrow.right {
+  right: 100px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+  }
+
+  .arrow.left {
+    left: 20px;
+  }
+
+  .arrow.right {
+    right: 20px;
+  }
+
+  .category-card {
+    width: 90%;
+  }
+
+  .category-img {
+    height: 180px;
+  }
+}

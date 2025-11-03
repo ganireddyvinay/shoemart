@@ -1,0 +1,49 @@
+.details-container {
+  padding: 120px 50px;
+  display: flex;
+  justify-content: center;
+  background: #f8f9fa;
+}
+
+.details-card {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 900px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.details-card img {
+  width: 100%;
+  max-width: 400px;
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+  padding: 30px;
+}
+
+.price {
+  color: #00bfff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.buy-btn {
+  background: #00bfff;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+.back-btn {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
