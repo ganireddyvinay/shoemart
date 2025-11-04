@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { CartContext } from "../context/CartContext"; // ✅ import cart context
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { cartItems } = useContext(CartContext); // ✅ access cart data
 
   return (
     <header className="navbar">
@@ -23,7 +25,13 @@ export default function Navbar() {
 
         {/* Right Side Buttons */}
         <div className="nav-actions">
-          <Link to="/cart" className="cart-link">Cart</Link>
+          {/* ✅ Cart count display */}
+          <Link to="/cart" className="cart-link">
+            🛒 Cart {cartItems.length > 0 && (
+              <span className="cart-count">({cartItems.length})</span>
+            )}
+          </Link>
+
           <Link to="/signup">
             <button className="btn signup">Sign up</button>
           </Link>

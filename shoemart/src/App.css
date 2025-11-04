@@ -1,31 +1,111 @@
+/* GENERAL PAGE */
 body {
-  font-family: "Poppins", sans-serif;
-  background-color: #111;
+  background: #f7f8fb;
 }
 
-.slider-section {
-  background: linear-gradient(90deg, #111, #333);
-  color: #fff;
-  padding: 60px 0;
+/* Sticky filter */
+.sticky-filter {
+  position: sticky;
+  top: 88px;
 }
 
-.btn {
-  border-radius: 30px;
+/* PRODUCTS GRID: uses CSS Grid so we can have 5 per row on large screens */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 16px;
 }
 
-footer a:hover {
-  opacity: 0.8;
+/* product card */
+.product-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
 }
 
-.card img {
-  transition: transform 0.3s ease;
+/* image wrap */
+.product-img-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  margin-bottom: 8px;
 }
 
-.card img:hover {
-  transform: scale(1.05);
+.product-img {
+  max-width: 100%;
+  max-height: 110px;
+  object-fit: contain;
 }
-body, html, #root {
+
+.badge-discount {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  background: #ff6b6b;
+  color: white;
+  font-size: 11px;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+/* product body */
+.product-title {
   margin: 0;
-  padding: 0;
-  width: 100%;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.product-price {
+  font-weight: 700;
+  color: #0d6efd; /* bootstrap primary */
+}
+
+/* Grid responsive breakpoints for 5-per-row */
+@media (min-width: 1400px) {
+  .products-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (min-width: 1100px) and (max-width: 1399px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 800px) and (max-width: 1099px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 576px) and (max-width: 799px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 575px) {
+  .products-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* small adjustments */
+.container-fluid {
+  max-width: 1280px;
+}
+
+/* make header sticky space */
+.navbar {
+  z-index: 999;
+}
+
+/* placeholder fallback style if an image missing */
+img[alt="placeholder"] {
+  background: #eee;
 }

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -11,46 +10,48 @@ import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import Signup from "./components/Signup";
 import ProductDetails from "./Pages/ProductDetails";
-import ShoeProducts from "./Pages/ShoeProducts"; // ✅ ADD THIS
-
+import ShoeProducts from "./Pages/ShoeProducts";
+import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/AuthContext";
 import "./App.css";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Routes>
-          {/* ✅ Home Page */}
-          <Route
-            path="/"
-            element={
-              <>
-                <Slider />
-                <Product />
-                <CategoryGallery />
-                <NewSeason />
-                <Features />
-                <Footer />
-              </>
-            }
-          />
+    <AuthProvider>
+      <CartProvider>
+        <Router>
+          <Navbar />
+          <Routes>
+            {/* ✅ Home Page */}
+            <Route
+              path="/"
+              element={
+                <>
+                  <Slider />
+                  <Product />
+                  <CategoryGallery />
+                  <NewSeason />
+                  <Features />
+                  <Footer />
+                </>
+              }
+            />
 
-          {/* ✅ Signup Page */}
-          <Route path="/signup" element={<Signup />} />
+            {/* ✅ Signup Page */}
+            <Route path="/signup" element={<Signup />} />
 
-          {/* ✅ Cart Page */}
-          <Route path="/cart" element={<Cart />} />
+            {/* ✅ Cart Page */}
+            <Route path="/cart" element={<Cart />} />
 
-          {/* ✅ Product Details */}
-          <Route path="/casual-shoes/:id" element={<ProductDetails />} />
+            {/* ✅ Product Details */}
+            <Route path="/casual-shoes/:id" element={<ProductDetails />} />
 
-          {/* ✅ Category-based Shoe Page (Fixes the Empty Page Issue) */}
-          <Route path="/products/:category" element={<ShoeProducts />} />
-          
-        </Routes>
-      </div>
-    </Router>
+            {/* ✅ Category-based Shoe Page */}
+            <Route path="/products/:category" element={<ShoeProducts />} />
+          </Routes>
+        </Router>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

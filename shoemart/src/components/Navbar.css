@@ -9,6 +9,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
 }
 
 /* NAVBAR */
@@ -19,7 +20,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* Full-width layout – NO side gaps */
@@ -28,7 +29,7 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 6px 8px; /* tiny spacing only */
+  padding: 6px 10px;
 }
 
 /* Brand (only natural width) */
@@ -45,7 +46,6 @@ body {
   letter-spacing: 0.5px;
   padding-right: 5px;
   margin-left: 10px;
-
 }
 
 /* Center Nav Links */
@@ -55,6 +55,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 22px;
+  transition: all 0.4s ease;
 }
 
 .nav-links a {
@@ -73,30 +74,49 @@ body {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
+  margin-right: 10px;
 }
 
 .cart-link {
+  position: relative;
   text-decoration: none;
   color: white;
   font-weight: 500;
-  padding: 1px;
+  padding: 1px 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
+/* ✅ Cart Badge */
+.cart-count {
+  background: crimson;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+}
+
+/* Sign Up Button */
 .btn.signup {
   background-color: #007bff;
   border: none;
   border-radius: 6px;
   color: white;
-  padding: 4px 10px;
+  padding: 6px 12px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-right: 25px;
+  transition: all 0.3s ease;
 }
 
 .btn.signup:hover {
   background-color: #0d6efd;
+  transform: translateY(-2px);
 }
 
 /* Hamburger for Mobile */
@@ -107,6 +127,7 @@ body {
   border: none;
   background: none;
   cursor: pointer;
+  margin-right: 8px;
 }
 
 .hamburger span {
@@ -130,6 +151,7 @@ body {
     padding: 15px 0;
     transform: translateY(-200%);
     opacity: 0;
+    transition: all 0.4s ease;
   }
 
   .nav-links.open {

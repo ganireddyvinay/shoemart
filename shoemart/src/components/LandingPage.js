@@ -10,34 +10,40 @@ const LandingPage = () => {
 
   const [index, setIndex] = useState(0);
 
-  // Auto slide every 4 seconds
+  // Auto slide forward only (loop)
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prev) => (prev === banners.length - 1 ? 0 : prev + 1));
-    }, 4000);
+      setIndex((prev) => (prev + 1) % banners.length);
+    }, 5000);
     return () => clearInterval(interval);
   }, [banners.length]);
 
   return (
     <div className="landing-container">
-      {/* Background banner slider */}
       <div
         className="banner-slider"
         style={{ transform: `translateX(-${index * 100}%)` }}
       >
         {banners.map((banner, i) => (
-          <div
+          <div className="banner-card" key={i}>
+            <img src={banner} alt={`Banner ${i + 1}`} className="banner-img" />
+          </div>
+        ))}
+      </div>
+
+      {/* Dots */}
+      <div className="dots">
+        {banners.map((_, i) => (
+          <span
             key={i}
-            className="banner-slide"
-            style={{ backgroundImage: `url(${banner})` }}
+            className={`dot ${index === i ? "active" : ""}`}
+            onClick={() => setIndex(i)}
           />
         ))}
       </div>
 
-      {/* Gradient overlay for aesthetic look */}
       <div className="overlay"></div>
 
-      {/* Foreground animated content */}
       <div className="content">
         <h1 className="title animate-fade">Step Into Style</h1>
         <p className="subtitle animate-slide">

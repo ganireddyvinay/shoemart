@@ -1,38 +1,61 @@
 .filter-sidebar {
-  width: 220px;
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  background: #f8f9fa;
+  padding: 1.2rem;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  min-width: 180px;
   height: fit-content;
-  position: sticky;
-  top: 20px;
+  align-self: flex-start;
 }
 
 .filter-sidebar h3 {
-  font-size: 18px;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 5px;
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
 }
 
-.filter-group {
-  margin-bottom: 20px;
+.filter-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.filter-group h4 {
-  font-size: 15px;
-  margin-bottom: 8px;
-  color: #555;
-}
-
-.filter-group label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 14px;
+.filter-buttons button {
+  background: #ffffff;
+  border: 1.5px solid #007bff;
+  border-radius: 8px;
+  padding: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  color: #007bff;
+  font-weight: 500;
 }
 
-.filter-group input[type="range"] {
-  width: 100%;
+.filter-buttons button:hover {
+  background: #007bff;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .filter-sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .filter-buttons {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .filter-buttons button {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    margin: 3px;
+  }
 }
