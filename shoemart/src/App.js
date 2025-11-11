@@ -20,9 +20,12 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <Router>
+          {/* ✅ Navbar always visible */}
           <Navbar />
+
+          {/* ✅ App routes */}
           <Routes>
-            {/* ✅ Home Page */}
+            {/* ---- Home Page ---- */}
             <Route
               path="/"
               element={
@@ -37,17 +40,17 @@ function App() {
               }
             />
 
-            {/* ✅ Signup Page */}
-            <Route path="/signup" element={<Signup />} />
+            {/* ---- Shoe Products (Filtered View) ---- */}
+            <Route path="/products/:category" element={<ShoeProducts />} />
 
-            {/* ✅ Cart Page */}
+            {/* ---- Product Details ---- */}
+            <Route path="/product/:id" element={<ProductDetails />} />
+
+            {/* ---- Cart Page ---- */}
             <Route path="/cart" element={<Cart />} />
 
-            {/* ✅ Product Details */}
-            <Route path="/casual-shoes/:id" element={<ProductDetails />} />
-
-            {/* ✅ Category-based Shoe Page */}
-            <Route path="/products/:category" element={<ShoeProducts />} />
+            {/* ---- Signup / Auth ---- */}
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </Router>
       </CartProvider>

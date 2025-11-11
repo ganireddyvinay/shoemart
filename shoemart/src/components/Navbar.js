@@ -5,7 +5,7 @@ import { CartContext } from "../context/CartContext"; // ✅ import cart context
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { cartItems } = useContext(CartContext); // ✅ access cart data
+  const { cartItems = [] } = useContext(CartContext) || {}; // ✅ safe fallback
 
   return (
     <header className="navbar">
@@ -27,7 +27,8 @@ export default function Navbar() {
         <div className="nav-actions">
           {/* ✅ Cart count display */}
           <Link to="/cart" className="cart-link">
-            🛒 Cart {cartItems.length > 0 && (
+            🛒 Cart{" "}
+            {cartItems.length > 0 && (
               <span className="cart-count">({cartItems.length})</span>
             )}
           </Link>

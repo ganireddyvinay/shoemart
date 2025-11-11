@@ -1,59 +1,114 @@
-import React, { useContext } from "react";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import React, { useContext, useState } from "react";
+import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import { CartContext } from "../context/CartContext";
+import "./Cart.css";
 
-export default function CartPage() {
-  const { cart, removeFromCart, updateQty, clearCart } = useContext(CartContext);
+export default function Cart() {
+  const { cartItems, removeFromCart, updateQuantity, clearCart } =
+    useContext(CartContext);
+  const [showCheckout, setShowCheckout] = useState(false);
 
-  const total = cart.reduce((s, p) => s + p.price * p.qty, 0);
+  const total = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  const handleCheckout = () => {
+    setShowCheckout(true);
+    clearCart();
+  };
 
   return (
-    <Container className="py-4">
-      <h4>Your Cart</h4>
-      {cart.length === 0 ? (
-        <div className="p-4 bg-white rounded shadow-sm">Your cart is empty.</div>
+    <Container className="py-4 cart-page">
+      <h2 className="mb-4 text-center">🛍️ Your Shopping Cart</h2>
+
+      {cartItems.length === 0 ? (
+        <div className="text-center py-5">
+          <h5>Your cart is empty.</h5>
+          <p>Add some products to get started!</p>
+          <Button href="/" variant="primary">
+            Continue Shopping
+          </Button>
+        </div>
       ) : (
-        <Row className="gy-3">
-          <Col md={8}>
-            {cart.map((item) => (
-              <div key={item.id} className="d-flex align-items-center gap-3 p-3 bg-white rounded shadow-sm">
-                <img src={item.image} alt={item.name} style={{ width: 84, height: 84, objectFit: "cover", borderRadius: 8 }} />
-                <div className="flex-grow-1">
-                  <div className="fw-semibold">{item.name}</div>
-                  <div className="text-muted">₹{item.price}</div>
-                </div>
+        <>
+          {cartItems.map((item) => (
+            <Row
+              key={item.id}
+              className="align-items-center cart-item border-bottom py-3"
+            >
+              <Col xs={12} md={2} className="text-center mb-3 mb-md-0">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="cart-img"
+                  onError={(e) => (e.target.src = "/img/placeholder.png")}
+                />
+              </Col>
 
-                <div className="text-end">
-                  <Form.Select aria-label="qty" value={item.qty} onChange={(e) => updateQty(item.id, Number(e.target.value))} style={{ width: 90 }}>
-                    {[1,2,3,4,5,6,7,8,9,10].map(q => <option key={q} value={q}>{q}</option>)}
-                  </Form.Select>
-                  <div className="mt-2">
-                    <Button variant="outline-danger" size="sm" onClick={() => removeFromCart(item.id)}>Remove</Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-            <div className="mt-3 d-flex justify-content-between">
-              <Button variant="danger" onClick={() => clearCart()}>Clear Cart</Button>
-            </div>
-          </Col>
+              <Col xs={12} md={4}>
+                <h6>{item.name}</h6>
+                <p className="text-muted mb-1">{item.brand || "Brand"}</p>
+                <p className="fw-bold text-dark">₹{item.price}</p>
+              </Col>
 
-          <Col md={4}>
-            <div className="p-3 bg-white rounded shadow-sm">
-              <h5>Price Details</h5>
-              <hr />
-              <div className="d-flex justify-content-between">
-                <div>Items ({cart.length})</div>
-                <div>₹{total}</div>
-              </div>
-              <hr />
-              <div className="d-grid mt-3">
-                <Button variant="primary" disabled>Proceed to Checkout (Demo)</Button>
-              </div>
-            </div>
-          </Col>
-        </Row>
+              <Col xs={12} md={3}>
+                <div className="d-flex align-items-center">
+                  <Button
+                    size="sm"
+                    variant="outline-secondary"
+                    onClick={() =>
+                      updateQuantity(item.id, Math.max(1, item.quantity - 1))
+                    }
+                  >
+                    -
+                  </Button>
+                  <span className="mx-2 fw-bold">{item.quantity}</span>
+                  <Button
+                    size="sm"
+                    variant="outline-secondary"
+                    onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                  >
+                    +
+                  </Button>
+                </div>
+              </Col>
+
+              <Col xs={12} md={2} className="text-md-end mt-2 mt-md-0">
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  Remove
+                </Button>
+              </Col>
+            </Row>
+          ))}
+
+          {/* Total Section */}
+          <div className="cart-summary text-end mt-4">
+            <h5>Total: ₹{total.toLocaleString()}</h5>
+            <Button variant="success" size="lg" onClick={handleCheckout}>
+              Proceed to Checkout
+            </Button>
+          </div>
+        </>
       )}
+
+      {/* ✅ Checkout Modal */}
+      <Modal show={showCheckout} onHide={() => setShowCheckout(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Order Successful 🎉</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          <p>Your payment was successful!</p>
+          <p>Thank you for shopping with ShoeMart 👟</p>
+          <Button variant="primary" onClick={() => setShowCheckout(false)}>
+            Back to Home
+          </Button>
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 }

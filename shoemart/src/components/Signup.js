@@ -1,45 +1,69 @@
-import React, { useContext, useState } from "react";
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Modal, Form, Button } from "react-bootstrap";
+import "./Signup.css";
 
 export default function Signup() {
-  const { signUp } = useContext(AuthContext);
-  const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [show, setShow] = useState(false);
+  const [user, setUser] = useState({ name: "", email: "" });
 
-  const handleSignup = (e) => {
+  // Check if user already registered
+  useEffect(() => {
+    const registeredUser = localStorage.getItem("registeredUser");
+    if (!registeredUser) {
+      setShow(true);
+    }
+  }, []);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // simple validation
-    if (!name || !email) return alert("Please fill name and email.");
-    // Mock signup
-    signUp({ name, email });
-    // redirect to cart after signup
-    navigate("/cart");
+
+    if (!user.name.trim() || !user.email.trim()) {
+      alert("Please fill out all fields!");
+      return;
+    }
+
+    localStorage.setItem("registeredUser", JSON.stringify(user));
+    setShow(false);
   };
 
   return (
-    <Container className="py-5">
-      <Row className="justify-content-center">
-        <Col md={6} lg={5}>
-          <Card className="p-3 shadow-sm">
-            <h4 className="mb-3">Sign Up / Login</h4>
-            <Form onSubmit={handleSignup}>
-              <Form.Group className="mb-2">
-                <Form.Label>Name</Form.Label>
-                <Form.Control value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" />
-              </Form.Group>
-              <Form.Group className="mb-2">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />
-              </Form.Group>
-              <Button type="submit" className="w-100">Sign up</Button>
-            </Form>
-            <small className="text-muted d-block mt-3">This is a demo signup (no backend). After signup you will be redirected to Cart.</small>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+    <Modal show={show} backdrop="static" centered size="md" className="signup-popup">
+      <Modal.Header className="border-0 text-center d-block">
+        <h4 className="fw-bold">Welcome to ShoeMart 👟</h4>
+        <p className="text-muted small">Please sign up to continue exploring our site</p>
+      </Modal.Header>
+
+      <Modal.Body>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter your name"
+              value={user.name}
+              onChange={(e) => setUser({ ...user, name: e.target.value })}
+            />
+          </Form.Group>
+
+          <Form.Group className="mb-3">
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter your email"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+          </Form.Group>
+
+          <Button type="submit" variant="dark" className="w-100">
+            Sign Up
+          </Button>
+        </Form>
+      </Modal.Body>
+
+      <Modal.Footer className="border-0 justify-content-center">
+        <small className="text-muted">Your data will only be stored locally.</small>
+      </Modal.Footer>
+    </Modal>
   );
-}
+} 

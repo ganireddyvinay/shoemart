@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import "./CategoryGallery.css";
 
 const categories = [
-  { id: 1, title: "Men", img: process.env.PUBLIC_URL + "/img/casual1.jpg" },
-  { id: 2, title: "Women", img: process.env.PUBLIC_URL + "/img/casual2.jpg" },
-  { id: 3, title: "Sports", img: process.env.PUBLIC_URL + "/img/casual3.jpg" },
-  { id: 4, title: "Formal", img: process.env.PUBLIC_URL + "/img/Formal shoes Banner.jpeg" },
+  { id: 1, title: "casuals", img: process.env.PUBLIC_URL + "/img/Casual Shoes.avif" },
+  { id: 2, title: "Sandals", img: process.env.PUBLIC_URL + "/img/Sandals.jpeg" },
+  { id: 3, title: "Sports", img: process.env.PUBLIC_URL + "/img/Sports shoe.jpeg" },
+  { id: 4, title: "Formal", img: process.env.PUBLIC_URL + "/img/Formal shoes.jpeg" },
 ];
 
 export default function CategoryGallery() {
