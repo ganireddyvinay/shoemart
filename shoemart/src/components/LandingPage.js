@@ -9,17 +9,34 @@ const LandingPage = () => {
   ];
 
   const [index, setIndex] = useState(0);
+  const [isXL, setIsXL] = useState(window.innerWidth >= 1200);
 
-  // Auto slide forward only (loop)
+  // Detect screen size
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % banners.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [banners.length]);
+    const handleResize = () => setIsXL(window.innerWidth >= 1200);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Auto slide only on XL devices
+  useEffect(() => {
+    if (isXL) {
+      const interval = setInterval(() => {
+        setIndex((prev) => (prev + 1) % banners.length);
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [isXL, banners.length]);
+
+  // Manual navigation (for smaller devices)
+  const handlePrev = () =>
+    setIndex((prev) => (prev === 0 ? banners.length - 1 : prev - 1));
+  const handleNext = () =>
+    setIndex((prev) => (prev + 1) % banners.length);
 
   return (
     <div className="landing-container">
+      {/* Banner Slider */}
       <div
         className="banner-slider"
         style={{ transform: `translateX(-${index * 100}%)` }}
@@ -30,6 +47,18 @@ const LandingPage = () => {
           </div>
         ))}
       </div>
+
+      {/* Manual navigation buttons for non-XL screens */}
+      {!isXL && (
+        <>
+          <button className="nav-btn left" onClick={handlePrev}>
+            &#10094;
+          </button>
+          <button className="nav-btn right" onClick={handleNext}>
+            &#10095;
+          </button>
+        </>
+      )}
 
       {/* Dots */}
       <div className="dots">
@@ -42,8 +71,10 @@ const LandingPage = () => {
         ))}
       </div>
 
+      {/* Overlay */}
       <div className="overlay"></div>
 
+      {/* Text Content */}
       <div className="content">
         <h1 className="title animate-fade">Step Into Style</h1>
         <p className="subtitle animate-slide">

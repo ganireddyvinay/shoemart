@@ -1,137 +1,200 @@
+/* === Layout === */
 .landing-container {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   overflow: hidden;
 }
 
+/* === Slider === */
 .banner-slider {
   display: flex;
-  transition: transform 1s ease-in-out;
-  width: 100%;
+  width: 300%;
   height: 100%;
+  transition: transform 1s ease-in-out;
 }
 
 .banner-card {
   flex: 0 0 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #f8f8f8;
-  overflow: hidden;
-  border-radius: 20px;
-  margin: 0 auto;
-  width: 95%;
-  height: 100%;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
 .banner-img {
   width: 100%;
-  height: auto;
-  max-height: 85vh;
+  height: 100vh;
   object-fit: cover;
-  border-radius: 20px;
+  object-position: center;
 }
 
+/* === Overlay === */
 .overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.4) 0%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+  z-index: 1;
 }
 
+/* === Content === */
 .content {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
   text-align: center;
-  z-index: 3;
-  padding: 0 1rem;
+  color: #fff;
+  z-index: 2;
 }
 
 .title {
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  font-weight: 700;
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
 }
 
 .subtitle {
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  margin: 10px 0 20px;
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  color: #eee;
 }
 
 .explore-btn {
-  background-color: #ff7b00;
-  color: white;
+  background: #e91e63;
   border: none;
-  padding: 10px 24px;
-  border-radius: 30px;
-  font-size: 1rem;
+  color: #fff;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  border-radius: 50px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .explore-btn:hover {
-  background-color: #ff9800;
+  background: #ff3d7a;
   transform: scale(1.05);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .landing-container {
-    height: 70vh;
-  }
+/* === Navigation Buttons (for mobile) === */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 3;
+  transition: all 0.3s ease;
+}
 
-  .banner-img {
-    max-height: 65vh;
+.nav-btn:hover {
+  background: rgba(233, 30, 99, 0.9);
+}
+
+.nav-btn.left {
+  left: 20px;
+}
+
+.nav-btn.right {
+  right: 20px;
+}
+
+/* === Dots === */
+.dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 6px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: #e91e63;
+}
+
+/* === Animations === */
+.animate-fade {
+  animation: fadeIn 1s ease-in;
+}
+
+.animate-slide {
+  animation: slideUp 1.2s ease-in;
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* === Responsive Design === */
+@media (max-width: 1200px) {
+  .landing-container {
+    height: 85vh;
+  }
+  .title {
+    font-size: 2.8rem;
+  }
+  .subtitle {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 768px) {
   .landing-container {
-    height: 60vh;
+    height: 75vh;
   }
-
-  .banner-img {
-    max-height: 55vh;
-  }
-
   .title {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
   }
-
   .subtitle {
+    font-size: 1rem;
+  }
+  .explore-btn {
+    padding: 10px 25px;
     font-size: 1rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .landing-container {
-    height: 50vh;
+    height: 70vh;
   }
-
-  .banner-img {
-    max-height: 45vh;
-  }
-
   .title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
-
   .subtitle {
-    font-size: 0.9rem;
-  }
-
-  .explore-btn {
-    padding: 8px 18px;
     font-size: 0.9rem;
   }
 }

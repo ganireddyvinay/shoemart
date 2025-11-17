@@ -5,7 +5,6 @@ import Slider from "./components/Slider";
 import Features from "./components/Features";
 import Product from "./components/Product";
 import CategoryGallery from "./components/CategoryGallery";
-import NewSeason from "./components/NewSeason";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart";
 import Signup from "./components/Signup";
@@ -33,7 +32,6 @@ function App() {
                   <Slider />
                   <Product />
                   <CategoryGallery />
-                  <NewSeason />
                   <Features />
                   <Footer />
                 </>

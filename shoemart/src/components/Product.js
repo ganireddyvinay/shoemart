@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { products } from "../data";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
+import { CartContext } from "../context/CartContext";
 import "./Product.css";
+import { style } from "framer-motion/client";
 
 function Product() {
   const [index, setIndex] = useState(0);
-  const [show, setShow] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const { addToCart } = useContext(CartContext);
+
   const selected = products[index];
 
   // Auto slide every 6s
@@ -20,9 +24,32 @@ function Product() {
   const handleNext = () =>
     setIndex((prev) => (prev === products.length - 1 ? 0 : prev + 1));
 
+  const handleAddToCart = () => {
+    addToCart({
+      id: selected.id,
+      name: selected.title,
+      price: selected.price,
+      image: selected.colors[0].img,
+    });
+    setShowAlert(true);
+    setTimeout(() => setShowAlert(false), 2000); // Hide message after 2s
+  };
+
   return (
     <section id="trending" className="trending-section text-center">
       <h2 className="trending-title">🔥 Trending Now</h2>
+
+     {/* ✅ Success message */}
+{showAlert && (
+  <Alert
+    variant="success"
+    className="mx-auto w-50"
+    style={{ backgroundColor: "#0026feff", color: "#fff" }}
+  >
+    ✅ Added to cart successfully!
+  </Alert>
+)}
+
 
       <div className="slider-container">
         {/* Left Button */}
@@ -48,10 +75,10 @@ function Product() {
             <h4 className="price-tag">${selected.price}</h4>
             <Button
               variant="dark"
-              className="buy-btn"
-              onClick={() => setShow(true)}
+              className="add-cart-btn"
+              onClick={handleAddToCart}
             >
-              Buy Now
+              🛒 Add to Cart
             </Button>
           </div>
         </div>
@@ -72,31 +99,6 @@ function Product() {
           ></span>
         ))}
       </div>
-
-      {/* Checkout Modal */}
-      <Modal show={show} onHide={() => setShow(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Checkout</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <Form.Control placeholder="Full name" />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Card Number</Form.Label>
-              <Form.Control placeholder="xxxx-xxxx-xxxx-xxxx" />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(false)}>
-            Cancel
-          </Button>
-          <Button variant="primary">Pay ${selected.price}</Button>
-        </Modal.Footer>
-      </Modal>
     </section>
   );
 }

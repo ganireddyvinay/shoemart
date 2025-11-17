@@ -1,13 +1,13 @@
 .trending-section {
   padding: 80px 20px;
-  background: #f8f9fa;
+  background: #212529;
   position: relative;
 }
 
 .trending-title {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #111;
+  color: #ffffff;
   margin-bottom: 40px;
 }
 
@@ -111,7 +111,8 @@
   margin-bottom: 20px;
 }
 
-.buy-btn {
+/* ===== Add to Cart Button ===== */
+.add-cart-btn {
   background: #111 !important;
   color: #fff !important;
   border: none !important;
@@ -124,8 +125,8 @@
   width: fit-content;
 }
 
-.buy-btn:hover {
-  background: #e91e63 !important;
+.add-cart-btn:hover {
+  background: #7b00ff !important; /* green hover */
   transform: scale(1.05);
 }
 
@@ -149,6 +150,20 @@
   background-color: #e91e63;
 }
 
+/* ===== Alert Animation ===== */
+.alert {
+  animation: fadeInOut 2s ease-in-out forwards;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
 /* ===== Responsive Design ===== */
 @media (max-width: 992px) {
   .product-slide {
@@ -167,7 +182,7 @@
     text-align: center;
   }
 
-  .buy-btn {
+  .add-cart-btn {
     margin: 0 auto;
   }
 
@@ -193,7 +208,7 @@
     font-size: 1.5rem;
   }
 
-  .buy-btn {
+  .add-cart-btn {
     padding: 10px 25px;
   }
 }
